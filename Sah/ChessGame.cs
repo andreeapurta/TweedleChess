@@ -4,15 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sah
+namespace Chess
 {
-    class ChessGame
+    public class ChessGame
     {
-        public Player player1;
-        public Player player2;
-        public Board board;
-        public Player currentTurn;
-        public List<Move> movesPlayed;
+        private Board board;
 
+        public Board Setup()
+        {
+            board = new Board();
+            return board;
+        }
+
+        public void Start()
+        {
+          
+        }
+
+        internal void Resize(int chessWidth, int chessHeight)
+        {
+            board.Resize(chessWidth, chessHeight);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Sah
+﻿namespace Chess
 {
     partial class GameForm
     {
@@ -36,8 +36,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "GameForm";
-            this.Text = "Form1";
+            this.Text = "Chess";
             this.Load += new System.EventHandler(this.GameForm_Load);
+            this.Resize += new System.EventHandler(this.gameForm_Resize);
             this.ResumeLayout(false);
 
         }

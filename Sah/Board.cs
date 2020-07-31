@@ -6,63 +6,48 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sah
+namespace Chess
 {
-    public class Board :Panel
-
+    public class Board : Panel
     {
+       
+        private int CellSize { get; set; }
 
-        Spot[][] squares;
-     
-
-        public Board():base()
+        public Board() : base()
         {
          
-           this.Name = "boardPanel";
-           this.Location = new Point(180, 25);
-           this.Size = new Size(400, 400);
-           this.BackColor = Color.LightBlue;
-
-
-            //this.resetBoard();
         }
 
-
-       protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            
-            
-            using (SolidBrush blueBrush = new SolidBrush(Color.Blue))
+            DrawBoard(e.Graphics);
+        }
+
+        public void Resize(int availableWidth, int availableHeight)
+        {
+            int x, y;
+            int newBoardSize;
+            availableHeight = availableHeight - 25 - 40;
+            availableWidth = availableWidth - 5  ;
+            newBoardSize = Math.Min(availableHeight, availableWidth);
+            x = (availableWidth - newBoardSize) / 2;
+            y = (availableHeight - newBoardSize) / 2 + 25;
+            SetBounds(x, y, newBoardSize, newBoardSize);
+            CellSize = Math.Min(availableWidth, availableHeight) / 8; //dimensiunea unei patratele minime
+        }
+
+        private void DrawBoard(Graphics g)
+        {
+            for (int column = 0; column < 8; column++)
             {
-                int columns = 0, yCoord = 0;
-                while (columns < 8)
+                for (int line = 0; line < 8; line++)
                 {
-                    int xCoord = 0; ;
-                    for (int i = 0; i < 8; i++)
-                    {
-
-                        Rectangle rect = new Rectangle(xCoord, yCoord, 50, 50);
-                        if((i+columns)%2==1)
-                        {
-                            e.Graphics.FillRectangle(Brushes.SaddleBrown, rect);
-                           
-                        }
-                        else
-                        {
-                            e.Graphics.FillRectangle(Brushes.White, rect);
-                        }
-                       
-                       
-                        xCoord = xCoord + 50;
-
-                    }
-                    yCoord += 50;
-                    columns++;
+                    g.FillRectangle((line + column) % 2 == 1 ? Brushes.SaddleBrown : Brushes.White, CellSize * line, CellSize * column, CellSize, CellSize);
                 }
             }
         }
 
-        public void ResetBoard()
+        private void DrawPieces(Graphics g)
         {
 
         }

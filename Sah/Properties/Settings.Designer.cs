@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sah.Properties
+namespace Chess.Properties
 {
 
 
