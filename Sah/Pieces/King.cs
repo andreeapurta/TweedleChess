@@ -21,14 +21,14 @@ namespace Sah.Pieces
 
             if (this.Color == ColorEnum.White)
             {
-                if (!currentPosition.Equals(new Coordinate(6, 9)))
+                if (!currentPosition.Equals(new Coordinate(3, 9)) || !currentPosition.Equals(new Coordinate(5, 9)))
                 {
                     HasMoved = true;
                 }
             }
             else
             {
-                if (!currentPosition.Equals(new Coordinate(4, 0)))
+                if (!currentPosition.Equals(new Coordinate(3, 0)) || !currentPosition.Equals(new Coordinate(5, 0)))
                 {
                     HasMoved = true;
                 }
