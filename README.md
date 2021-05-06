@@ -19,3 +19,5 @@ Boyer remarked that the variant yields "magnificent games" because there are two
 - the king may not be in check
 - the square the king goes to and any intervening squares may not be under attack
 - however, there is nothing to prevent castling if the rook is under attack
+
+More info: https://en.wikipedia.org/wiki/V._R._Parton
