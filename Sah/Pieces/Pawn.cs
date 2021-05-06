@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Sah.Pieces
 {
-    internal class Pawn : Piece
+    internal sealed class Pawn : Piece
     {
         public Pawn(ColorEnum color, List<string> moves, IGameContext gameContext, Coordinate coordinate) : base(color, moves, gameContext, coordinate)
         {
