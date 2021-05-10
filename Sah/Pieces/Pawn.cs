@@ -1,14 +1,25 @@
-﻿using Chess;
+﻿using Chess.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
-namespace Sah.Pieces
+namespace Chess.Pieces
 {
     internal sealed class Pawn : Piece
     {
+        public Pawn(ColorEnum color, PieceEnum type) : base(color, type)
+        {
+        }
+
         public Pawn(ColorEnum color, List<string> moves, IGameContext gameContext, Coordinate coordinate) : base(color, moves, gameContext, coordinate)
         {
             Value = 1;
+        }
+
+        public override Bitmap GetImage()
+        {
+            throw new NotImplementedException();
         }
 
         public override List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, IGameContext gameContext)

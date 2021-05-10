@@ -1,7 +1,7 @@
 ﻿using Chess;
 using System.Collections.Generic;
 
-namespace Sah.Pieces
+namespace Chess.Interfaces
 {
     public interface IGameContext
     {

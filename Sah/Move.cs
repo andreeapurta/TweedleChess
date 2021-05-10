@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Chess;
 
 namespace Chess
 {
-    class Move
+    public class Move
     {
+        public Coordinate StartPosition { get; set; }
+        public Coordinate EndPosition { get; set; }
+
+        public Move()
+        {
+        }
     }
 }

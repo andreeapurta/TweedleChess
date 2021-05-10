@@ -1,4 +1,4 @@
-﻿namespace Sah
+﻿namespace Chess
 {
     public class Coordinate
     {

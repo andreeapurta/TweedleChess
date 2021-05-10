@@ -1,10 +1,12 @@
-﻿namespace Sah
+﻿namespace Chess
 {
     public enum PieceEnum
     {
         None = ' ',
-        King = 'K',
-        Queen = 'Q',
+        LeftKing = 'K',
+        LeftQueen = 'Q',
+        RightKing = 'k',
+        RightQueen = 'q',
         Rook = 'R',
         Knight = 'N',
         Bishop = 'B',

@@ -1,5 +1,4 @@
-﻿using Sah;
-using Sah.Pieces;
+﻿using Chess.Interfaces;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,9 +10,11 @@ namespace Chess
         private const int BoardSize = 10;
         private int CellSize { get; set; }
         public Coordinate[,] Grid { get; set; }
+        private Context Context { get; set; }
 
         public Board() : base()
         {
+            Grid = new Coordinate[BoardSize, BoardSize];
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -64,8 +65,12 @@ namespace Chess
         //    }
         //}
 
-        private void DrawPieces(Graphics g, Piece piece)
+        private void DrawPieces(Graphics g)
         {
+            foreach (Coordinate coord in Context.Layout.Keys)
+            {
+                g.DrawImage(Context.Layout[coord].GetImage(), coord.Column * CellSize, coord.Line * CellSize, CellSize, CellSize);
+            }
         }
     }
 }
