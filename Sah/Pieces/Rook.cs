@@ -13,11 +13,6 @@ namespace Chess.Pieces
             Value = 5;
         }
 
-        public override Bitmap GetImage()
-        {
-            throw new NotImplementedException();
-        }
-
         public override List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, Context gameContext)
         {
             List<Coordinate> availableMoves = new List<Coordinate>();

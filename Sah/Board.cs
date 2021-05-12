@@ -1,5 +1,4 @@
 ﻿using Chess.Events;
-using Chess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -31,12 +30,7 @@ namespace Chess
             BoardBrushes = brushes;
             Width = Size;
             Height = Size;
-
             DoubleBuffered = true;
-
-            MouseMove += new MouseEventHandler(this.Board_MouseMove);
-            MouseDown += new MouseEventHandler(this.Board_MouseDown);
-            MouseUp += new MouseEventHandler(this.Board_MouseUp);
             CurrentMove = new Move();
         }
 
@@ -70,68 +64,48 @@ namespace Chess
             return new Coordinate(newX, newY);
         }
 
-        private void Board_MouseMove(object sender, MouseEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            try
-            {
-                Coordinate newMouseCoordinate = TranslateMouseCoordinate(e.X, e.Y);
+            Coordinate newMouseCoordinate = TranslateMouseCoordinate(e.X, e.Y);
 
-                if (MouseOverCoordinate == null || !MouseOverCoordinate.Equals(newMouseCoordinate))
-                {
-                    Coordinate oldMouseCoordinate = MouseOverCoordinate;
-                    MouseOverCoordinate = newMouseCoordinate;
-                    DrawAvailableMoves(oldMouseCoordinate);
-                }
-            }
-            catch (Exception ex)
+            if (MouseOverCoordinate == null || !MouseOverCoordinate.Equals(newMouseCoordinate))
             {
-                Console.WriteLine(ex);
-                MessageBox.Show("An error occurred while moving the mouse.",
-                   "Mouse move Error",
-                   MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                Coordinate oldMouseCoordinate = MouseOverCoordinate;
+                MouseOverCoordinate = newMouseCoordinate;
+                DrawAvailableMoves(oldMouseCoordinate, PieceFactory);
             }
         }
 
-        private void Board_MouseDown(object sender, MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            try
+            CurrentMove = new Move();
+
+            CurrentMove.StartPosition = MouseOverCoordinate;
+            if (Context.Layout.ContainsKey(MouseOverCoordinate))
             {
-                CurrentMove.StartPosition = MouseOverCoordinate;
-                if (Context.Layout.ContainsKey(MouseOverCoordinate))
-                {
-                    Cursor = new Cursor(Context.Layout[MouseOverCoordinate].GetImage().GetHicon());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while moving down the mouse.",
-                   "Mouse move Error",
-                   MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                CurrentMove.piece = Context.Layout[MouseOverCoordinate];
+                Cursor = new Cursor(ChessPieceImage.GetInstance(CurrentMove.piece.Type, CurrentMove.piece.Color).GetHicon());
             }
         }
 
-        private void Board_MouseUp(object sender, MouseEventArgs e)
+        protected override void OnMouseUp(MouseEventArgs e)
         {
-            try
+            CurrentMove.EndPosition = MouseOverCoordinate;
+            //+daca e si randul lui
+            if (CurrentMove.piece != null)
             {
-                CurrentMove.EndPosition = MouseOverCoordinate;
-                MoveProposeEventArgs args = new MoveProposeEventArgs() { Move = CurrentMove };
-                ProposeMove?.Invoke(this, args);
-
+                var nectMove = CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context);
+                if (CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context).Contains(CurrentMove.EndPosition))
+                {
+                    Context.Layout.Update(CurrentMove);
+                    //schimbi randul lui
+                    this.Refresh();
+                }
                 Cursor = Cursors.Default;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while moving up the mouse.",
-                    "Mouse move Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
         }
 
-        private void DrawAvailableMoves(Coordinate oldMouseCoordinate)
+        private void DrawAvailableMoves(Coordinate oldMouseCoordinate, PieceFactory pieceFactory)
         {
             if (MouseOverCoordinate == null || oldMouseCoordinate == null)
             {
@@ -168,25 +142,14 @@ namespace Chess
             List<Coordinate> availableMoves = piece.GetNextLegalMoves(MouseOverCoordinate, Context);
             foreach (Coordinate coordinate in availableMoves)
             {
-                g.DrawRectangle(Pens.Yellow, coordinate.Column * CellSize, coordinate.Line * CellSize, CellSize, CellSize);
+                g.DrawRectangle(Pens.Purple, coordinate.Column * CellSize, coordinate.Line * CellSize, CellSize, CellSize);
             }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            //try
-            //{
             DrawBoard(e.Graphics);
             DrawPieces(e.Graphics);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex);
-            //    MessageBox.Show("An error occurred while drawing the board.",
-            //       "Board Draw Error",
-            //       MessageBoxButtons.OK,
-            //       MessageBoxIcon.Error);
-            //}
         }
 
         public void Resize(int availableWidth, int availableHeight)
@@ -224,7 +187,7 @@ namespace Chess
             foreach (Coordinate coord in Context.Layout.Keys)
             {
                 var getImage = ChessPieceImage.GetInstance(Context.Layout[coord].Type, Context.Layout[coord].Color);
-                g.DrawImage(getImage, coord.Column * CellSize, coord.Line * CellSize, CellSize, CellSize);
+                g.DrawImage(getImage, coord.Line * CellSize, coord.Column * CellSize, CellSize, CellSize);
             }
         }
     }

@@ -27,10 +27,5 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
-
-        public virtual Bitmap GetImage()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

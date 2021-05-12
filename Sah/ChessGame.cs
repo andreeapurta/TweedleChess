@@ -13,6 +13,7 @@ namespace Chess
         private Board board;
         private Context context;
         private ChessLayout layout;
+        private PieceFactory pieceFactory;
 
         public Board Setup()
         {
@@ -26,7 +27,8 @@ namespace Chess
         {
             ChessLayout chessLayout = new ChessLayout();
             chessLayout.Initialize();
-            board.Initialize(gameForm.ClientSize.Height - gameForm.MainMenuStrip.Height, new PieceFactory(), new Brush[2] { Brushes.SandyBrown, Brushes.SaddleBrown });
+            pieceFactory = new PieceFactory();
+            board.Initialize(gameForm.ClientSize.Height - gameForm.MainMenuStrip.Height, pieceFactory, new Brush[2] { Brushes.SandyBrown, Brushes.SaddleBrown });
 
             gameForm.Controls.Add(board);
             board.Invalidate();
