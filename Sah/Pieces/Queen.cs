@@ -10,10 +10,6 @@ namespace Chess.Pieces
     {
         public Queen(ColorEnum color, PieceEnum type) : base(color, type)
         {
-        }
-
-        public Queen(ColorEnum color, List<string> moves, IGameContext gameContext, Coordinate coordinate) : base(color, moves, gameContext, coordinate)
-        {
             Value = 9;
         }
 
@@ -22,7 +18,7 @@ namespace Chess.Pieces
             throw new NotImplementedException();
         }
 
-        public override List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, IGameContext gameContext)
+        public override List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, Context gameContext)
         {
             List<Coordinate> availableMoves = new List<Coordinate>();
             bool canMoveUp = true;
@@ -40,11 +36,11 @@ namespace Chess.Pieces
                 {
                     if (currentPosition.Line - i >= 0)
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column, currentPosition.Line - i)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column, currentPosition.Line - i)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column, currentPosition.Line - i));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column, currentPosition.Line - i)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column, currentPosition.Line - i)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column, currentPosition.Line - i));
                             canMoveUp = false;
@@ -64,11 +60,11 @@ namespace Chess.Pieces
                 {
                     if (currentPosition.Line + i < 10)
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column, currentPosition.Line + i)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column, currentPosition.Line + i)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column, currentPosition.Line + i));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column, currentPosition.Line + i)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column, currentPosition.Line + i)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column, currentPosition.Line + i));
                             canMoveDown = false;
@@ -88,11 +84,11 @@ namespace Chess.Pieces
                 {
                     if (currentPosition.Column - i >= 0)
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column - i, currentPosition.Line)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column - i, currentPosition.Line)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column - i, currentPosition.Line));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column - i, currentPosition.Line)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column - i, currentPosition.Line)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column - i, currentPosition.Line));
                             canMoveLeft = false;
@@ -112,11 +108,11 @@ namespace Chess.Pieces
                 {
                     if (currentPosition.Column + i < 10)
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column + i, currentPosition.Line)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column + i, currentPosition.Line)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column + i, currentPosition.Line));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column + i, currentPosition.Line)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column + i, currentPosition.Line)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column + i, currentPosition.Line));
                             canMoveRight = false;
@@ -136,11 +132,11 @@ namespace Chess.Pieces
                 {
                     if ((currentPosition.Column - i >= 0) && (currentPosition.Line - i >= 0))
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column - i, currentPosition.Line - i)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column - i, currentPosition.Line - i)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column - i, currentPosition.Line - i));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column - i, currentPosition.Line - i)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column - i, currentPosition.Line - i)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column - i, currentPosition.Line - i));
                             canMoveTopLeft = false;
@@ -160,11 +156,11 @@ namespace Chess.Pieces
                 {
                     if ((currentPosition.Column + i < 10) && (currentPosition.Line - i >= 0))
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column + i, currentPosition.Line - i)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column + i, currentPosition.Line - i)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column + i, currentPosition.Line - i));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column + i, currentPosition.Line - i)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column + i, currentPosition.Line - i)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column + i, currentPosition.Line - i));
                             canMoveTopRight = false;
@@ -184,11 +180,11 @@ namespace Chess.Pieces
                 {
                     if ((currentPosition.Column - i >= 0) && (currentPosition.Line + i < 10))
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column - i, currentPosition.Line + i)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column - i, currentPosition.Line + i)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column - i, currentPosition.Line + i));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column - i, currentPosition.Line + i)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column - i, currentPosition.Line + i)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column - i, currentPosition.Line + i));
                             canMoveBottomLeft = false;
@@ -208,11 +204,11 @@ namespace Chess.Pieces
                 {
                     if ((currentPosition.Column + i < 10) && (currentPosition.Line + i < 10))
                     {
-                        if (!gameContext.CurrentLayout.Keys.Contains(new Coordinate(currentPosition.Column + i, currentPosition.Line + i)))
+                        if (!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.Column + i, currentPosition.Line + i)))
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column + i, currentPosition.Line + i));
                         }
-                        else if (gameContext.CurrentLayout[new Coordinate(currentPosition.Column + i, currentPosition.Line + i)].Color != this.Color)
+                        else if (gameContext.Layout[new Coordinate(currentPosition.Column + i, currentPosition.Line + i)].Color != this.Color)
                         {
                             availableMoves.Add(new Coordinate(currentPosition.Column + i, currentPosition.Line + i));
                             canMoveBottomRight = false;

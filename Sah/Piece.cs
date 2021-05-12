@@ -9,14 +9,6 @@ namespace Chess
 {
     public abstract class Piece
     {
-        public Piece(ColorEnum color, List<string> moves, IGameContext gameContext, Coordinate coordinate)
-        {
-            Color = color;
-            Moves = moves;
-            this.gameContext = gameContext;
-            Coordinate = coordinate;
-        }
-
         public Piece(ColorEnum color, PieceEnum type)
         {
             Color = color;
@@ -29,9 +21,9 @@ namespace Chess
         public PieceEnum Type { get; set; }
         protected int Value { get; set; }
         protected Coordinate Coordinate { get; set; }
-        protected IGameContext gameContext;
+        protected Context gameContext;
 
-        public virtual List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, IGameContext gameContex)
+        public virtual List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, Context gameContex)
         {
             throw new NotImplementedException();
         }

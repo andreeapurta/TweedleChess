@@ -44,21 +44,19 @@ namespace Chess
 
         private void load_Click(object sender, EventArgs e)
         {
-        
         }
 
         private void start_Click(object sender, EventArgs e)
         {
             Board board = game.Setup();
             board.Resize(Width, Height);
-   
+
             Controls.Add(board);
             game.Start();
         }
 
         private void save_Click(object sender, EventArgs e)
         {
-
         }
 
         private void exit_Click(object sender, EventArgs e)

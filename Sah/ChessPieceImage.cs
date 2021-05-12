@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Chess
 {
-    public class ChessPieceImage
+    public sealed class ChessPieceImage
     {
         private int Type { get; set; }
         private int Color { get; set; }
@@ -17,8 +17,14 @@ namespace Chess
 
         private static Bitmap CropImage(PieceEnum type, ColorEnum color)
         {
+            Bitmap bitmap = new Bitmap(60, 60);
+            Graphics g = Graphics.FromImage(bitmap);
             Rectangle srcRect = new Rectangle((int)type * 60, (int)color * 60, 60, 60);
-            return chessPiecesImage.Clone(srcRect, chessPiecesImage.PixelFormat);
+            Rectangle destRect = new Rectangle(0, 0, 60, 60);
+
+            g.DrawImage(chessPiecesImage, destRect, srcRect, GraphicsUnit.Pixel);
+
+            return bitmap;
         }
 
         public static Bitmap GetInstance(PieceEnum type, ColorEnum color)

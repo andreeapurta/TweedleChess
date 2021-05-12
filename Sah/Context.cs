@@ -5,15 +5,20 @@ namespace Chess
 {
     public class Context
     {
-        public ILayout Layout { get; set; }
+        public Layout Layout { get; set; }
         public List<Move> Moves { get; set; }
         public ColorEnum CurrentPlayer { get; set; }
 
-        public void Initialize(ILayout layout)
+        public void Initialize()
         {
-            Layout = layout;
             Moves = new List<Move>();
             CurrentPlayer = ColorEnum.White;
+        }
+
+        public Context(Layout layout)
+        {
+            Layout = layout;
+            InitializeStartingBoard();
         }
 
         public void InitializeStartingBoard()
