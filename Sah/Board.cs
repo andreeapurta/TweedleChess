@@ -38,9 +38,8 @@ namespace Chess
         {
             MouseOverCoordinate = new Coordinate(e.X / CellSize, e.Y / CellSize);
 
-            if (MouseOverCoordinate != null)
+            if (MouseOverCoordinate != null && Context.Layout.ContainsKey(MouseOverCoordinate))
             {
-                Console.WriteLine(Context.Layout[MouseOverCoordinate].Type);
                 DrawAvailableMoves(MouseOverCoordinate);
             }
         }
@@ -66,7 +65,7 @@ namespace Chess
                 var nectMove = CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context);
                 if (CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context).Contains(CurrentMove.EndPosition))
                 {
-                    //Context.Layout.Update(CurrentMove, );
+                    Context.Update(CurrentMove);
                     //schimbi randul lui
                     this.Refresh();
                 }
@@ -84,7 +83,7 @@ namespace Chess
                 List<Coordinate> availableMoves = piece.GetNextLegalMoves(oldMouseCoordinate, Context);
                 foreach (Coordinate coordinate in availableMoves)
                 {
-                    g.DrawRectangle(new Pen(Color.Purple, 3), coordinate.Y * CellSize, coordinate.X * CellSize, CellSize, CellSize);
+                    g.DrawRectangle(new Pen(Color.Purple, 3), coordinate.X * CellSize, coordinate.Y * CellSize, CellSize, CellSize);
                 }
             }
         }
@@ -130,7 +129,7 @@ namespace Chess
             foreach (Coordinate coord in Context.Layout.Keys)
             {
                 var getImage = ChessPieceImage.GetInstance(Context.Layout[coord].Type, Context.Layout[coord].Color);
-                g.DrawImage(getImage, coord.Y * CellSize, coord.X * CellSize, CellSize, CellSize);
+                g.DrawImage(getImage, coord.X * CellSize, coord.Y * CellSize, CellSize, CellSize);
             }
         }
     }

@@ -35,6 +35,12 @@ namespace Chess
             return cloneContext;
         }
 
+        public void Update(Move move)
+        {
+            this.Layout.Update(move);
+            ToggleCurrentPlayer();
+        }
+
         public void ToggleCurrentPlayer()
         {
             if (CurrentPlayer == ColorEnum.White)

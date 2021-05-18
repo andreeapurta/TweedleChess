@@ -37,7 +37,10 @@ namespace Chess
 
         internal void Resize(int chessWidth, int chessHeight)
         {
-            board.Resize(chessWidth, chessHeight);
+            if (board != null)
+            {
+                board.Resize(chessWidth, chessHeight);
+            }
         }
 
         public void Start()

@@ -52,7 +52,7 @@ namespace Chess
             Add(new Coordinate(5, 9), pieceFactory.CreatePiece(PieceEnum.RightQueen, ColorEnum.White));
         }
 
-        public override void Update(Move move, ColorEnum movingPlayer)
+        public override void Update(Move move)
         {
             Piece piece = pieceFactory.CreatePiece(this[move.StartPosition].Type, this[move.StartPosition].Color);
             Remove(move.StartPosition);

@@ -43,7 +43,7 @@ namespace Chess
 
                 if (availableMoves.Contains(e.Move.EndPosition))
                 {
-                    Context.Layout.Update(e.Move, Context.CurrentPlayer);
+                    Context.Update(e.Move);
                     Context.ToggleCurrentPlayer();
                     Context.Moves.Add(new Move() { StartPosition = e.Move.StartPosition, EndPosition = e.Move.EndPosition });
 

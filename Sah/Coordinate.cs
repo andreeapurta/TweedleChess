@@ -5,7 +5,7 @@
         public int Y { get; set; }
         public int X { get; set; }
 
-        public Coordinate(int Y, int X)
+        public Coordinate(int X, int Y)
         {
             this.Y = Y;
             this.X = X;

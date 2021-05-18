@@ -21,7 +21,7 @@ namespace Chess.Pieces
                 if ((currentPosition.Y - 1 >= 0) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y - 1)))
                 {
                     availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y - 1));
-                    if ((currentPosition.Y == 8) && (currentPosition.Y - 2 >= 0) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y - 2)))
+                    if ((currentPosition.Y - 2 >= 0) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y - 2)))
                     {
                         availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y - 2));
                     }
@@ -40,7 +40,7 @@ namespace Chess.Pieces
                 if ((currentPosition.Y + 1 < 10) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y + 1)))
                 {
                     availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y + 1));
-                    if ((currentPosition.Y == 1) && (currentPosition.Y + 2 < 10) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y + 2)))
+                    if ((currentPosition.Y + 2 < 10) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y + 2)))
                     {
                         availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y + 2));
                     }
