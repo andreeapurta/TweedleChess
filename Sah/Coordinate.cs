@@ -2,27 +2,27 @@
 {
     public class Coordinate
     {
-        public int Line { get; set; }
-        public int Column { get; set; }
+        public int Y { get; set; }
+        public int X { get; set; }
 
-        public Coordinate(int line, int column)
+        public Coordinate(int Y, int X)
         {
-            Line = line;
-            Column = column;
+            this.Y = Y;
+            this.X = X;
         }
 
         public override bool Equals(object obj)
         {
             return obj is Coordinate coordinate &&
-                   Line == coordinate.Line &&
-                   Column == coordinate.Column;
+                   Y == coordinate.Y &&
+                   X == coordinate.X;
         }
 
         public override int GetHashCode()
         {
             int hashCode = -1456208474;
-            hashCode = hashCode * -1521134295 + Line.GetHashCode();
-            hashCode = hashCode * -1521134295 + Column.GetHashCode();
+            hashCode = hashCode * -1521134295 + Y.GetHashCode();
+            hashCode = hashCode * -1521134295 + X.GetHashCode();
             return hashCode;
         }
     }

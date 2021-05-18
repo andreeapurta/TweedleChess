@@ -9,21 +9,30 @@ namespace Chess
         public List<Move> Moves { get; set; }
         public ColorEnum CurrentPlayer { get; set; }
 
-        public void Initialize()
+        public Context()
         {
-            Moves = new List<Move>();
-            CurrentPlayer = ColorEnum.White;
         }
 
-        public Context(Layout layout)
+        public void Initialize(Layout layout)
         {
             Layout = layout;
-            InitializeStartingBoard();
+            Moves = new List<Move>();
+            CurrentPlayer = ColorEnum.White;
         }
 
         public void InitializeStartingBoard()
         {
             Layout.Initialize();
+        }
+
+        public Context Clone()
+        {
+            Context cloneContext = new Context();
+            cloneContext.CurrentPlayer = CurrentPlayer;
+            cloneContext.Moves = new List<Move>(Moves);
+            cloneContext.Layout = Layout.Clone();
+
+            return cloneContext;
         }
 
         public void ToggleCurrentPlayer()

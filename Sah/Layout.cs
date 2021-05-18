@@ -8,6 +8,8 @@ namespace Chess
 
         public abstract void Initialize();
 
-        public abstract void Update(Move move);
+        public abstract void Update(Move move, ColorEnum playerColor);
+
+        public abstract Layout Clone();
     }
 }

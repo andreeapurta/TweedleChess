@@ -14,23 +14,24 @@ namespace Chess
         private Context context;
         private ChessLayout layout;
         private PieceFactory pieceFactory;
+        public Referee referee;
 
-        public Board Setup()
+        public void Setup(Board board)
         {
             layout = new ChessLayout();
-            context = new Context(layout);
-            board = new Board(context);
-            return board;
+            pieceFactory = new PieceFactory();
+            context = new Context();
+            referee = new Referee();
+            this.board = board;
         }
 
-        public void Initialize(Form gameForm)
+        public void Initialize(GameForm gameForm)
         {
-            ChessLayout chessLayout = new ChessLayout();
-            chessLayout.Initialize();
-            pieceFactory = new PieceFactory();
-            board.Initialize(gameForm.ClientSize.Height - gameForm.MainMenuStrip.Height, pieceFactory, new Brush[2] { Brushes.SandyBrown, Brushes.SaddleBrown });
+            context.Initialize(layout);
+            referee.Initialize(context, pieceFactory);
 
-            gameForm.Controls.Add(board);
+            board.Initialize(gameForm.ClientSize.Height - gameForm.mainMenu.Height, pieceFactory, context, new Brush[2] { Brushes.SandyBrown, Brushes.SaddleBrown });
+
             board.Invalidate();
         }
 
@@ -41,6 +42,7 @@ namespace Chess
 
         public void Start()
         {
+            referee.StartGame();
         }
     }
 }

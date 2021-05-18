@@ -12,11 +12,15 @@ namespace Chess
 {
     public partial class GameForm : Form
     {
-        private ChessGame game = new ChessGame();
+        private ChessGame game;
+        public Board Board { get; set; }
+        public MenuStrip mainMenu = new MenuStrip();
 
         public GameForm()
         {
             InitializeComponent();
+            Board = new Board();
+            game = new ChessGame();
         }
 
         private void GameForm_Load(object sender, EventArgs e)
@@ -26,7 +30,6 @@ namespace Chess
 
         private void CreateMainMenu()
         {
-            MenuStrip mainMenu = new MenuStrip();
             ToolStripMenuItem mainMenuItem = new ToolStripMenuItem("Menu");
             mainMenuItem.DropDownItems.Add("Start", null, start_Click);
             mainMenuItem.DropDownItems.Add("Load", null, load_Click);
@@ -48,10 +51,10 @@ namespace Chess
 
         private void start_Click(object sender, EventArgs e)
         {
-            Board board = game.Setup();
-            board.Resize(Width, Height);
-
-            Controls.Add(board);
+            game.Setup(Board);
+            game.Initialize(this);
+            Controls.Add(Board);
+            Board.Resize(Width, Height);
             game.Start();
         }
 

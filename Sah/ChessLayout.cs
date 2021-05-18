@@ -52,7 +52,7 @@ namespace Chess
             Add(new Coordinate(5, 9), pieceFactory.CreatePiece(PieceEnum.RightQueen, ColorEnum.White));
         }
 
-        public override void Update(Move move)
+        public override void Update(Move move, ColorEnum movingPlayer)
         {
             Piece piece = pieceFactory.CreatePiece(this[move.StartPosition].Type, this[move.StartPosition].Color);
             Remove(move.StartPosition);
@@ -63,6 +63,18 @@ namespace Chess
             }
 
             Add(move.EndPosition, piece);
+        }
+
+        public override Layout Clone()
+        {
+            ChessLayout cloneLayout = new ChessLayout();
+
+            foreach (Coordinate c in Keys)
+            {
+                cloneLayout.Add(c, pieceFactory.CreatePiece(this[c].Type, this[c].Color));
+            }
+
+            return cloneLayout;
         }
     }
 }
