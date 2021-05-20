@@ -11,7 +11,7 @@ namespace Chess
         private static Bitmap chessPiecesImage = new Bitmap(Chess.Properties.Resources.pieces);
         private static Dictionary<PieceEnum, Dictionary<ColorEnum, Bitmap>> instances;
 
-        public ChessPieceImage()
+        private ChessPieceImage()
         {
         }
 
@@ -82,8 +82,6 @@ namespace Chess
 
             g.DrawImage(chessPiecesImage, destRect, srcRect, GraphicsUnit.Pixel);
             return bitmap;
-            //Rectangle srcRect = new Rectangle((int)type * 60, (int)color * 60, 60, 60);
-            //return chessPiecesImage.Clone(srcRect, chessPiecesImage.PixelFormat);
         }
 
         public static Bitmap GetInstance(PieceEnum type, ColorEnum color)

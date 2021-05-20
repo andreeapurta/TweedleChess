@@ -38,9 +38,12 @@ namespace Chess
         {
             MouseOverCoordinate = new Coordinate(e.X / CellSize, e.Y / CellSize);
 
-            if (MouseOverCoordinate != null && Context.Layout.ContainsKey(MouseOverCoordinate))
+            if (CurrentMove.piece != null)
             {
-                DrawAvailableMoves(MouseOverCoordinate);
+                if (MouseOverCoordinate != null && Context.Layout.ContainsKey(MouseOverCoordinate) && (Context.CurrentPlayer == CurrentMove.piece.Color))
+                {
+                    DrawAvailableMoves(MouseOverCoordinate);
+                }
             }
         }
 
@@ -59,17 +62,35 @@ namespace Chess
         protected override void OnMouseUp(MouseEventArgs e)
         {
             CurrentMove.EndPosition = MouseOverCoordinate;
-            //+daca e si randul lui
+
             if (CurrentMove.piece != null)
             {
-                var nectMove = CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context);
-                if (CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context).Contains(CurrentMove.EndPosition))
+                if (Context.CurrentPlayer == CurrentMove.piece.Color)
                 {
-                    Context.Update(CurrentMove);
-                    //schimbi randul lui
-                    this.Refresh();
+                    //foreach (var piece in Context.Layout.Values)
+                    //{
+                    //    if (piece.Color != CurrentMove.piece.Color)
+                    //    {
+                    //    }
+                    //}
+
+                    var nextMove = CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context);
+                    if (CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context).Contains(CurrentMove.EndPosition))
+                    {
+                        Context.Update(CurrentMove);
+                        this.Refresh();
+                    }
+                    Cursor = Cursors.Default;
                 }
-                Cursor = Cursors.Default;
+                else
+                {
+                    MessageBox.Show("Not your turn");
+                    Cursor = Cursors.Default;
+                    //TextBox warningTurnTxtBox = new TextBox();
+                    //warningTurnTxtBox.Text = Context.CurrentPlayer.ToString() + " turn!";
+                    //warningTurnTxtBox.Visible = true;
+                    //warningTurnTxtBox.Location = new Point(300, 50);
+                }
             }
         }
 
