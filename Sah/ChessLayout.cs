@@ -76,5 +76,13 @@ namespace Chess
 
             return cloneLayout;
         }
+
+        public override void Promote(Coordinate coordinate, ColorEnum color)
+        {
+            var promoteCoordinate = coordinate;
+            Piece newPiece = pieceFactory.CreatePiece(PieceEnum.RightQueen, color);
+            this.Remove(coordinate);
+            this.Add(promoteCoordinate, newPiece);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Chess
         private int Type { get; set; }
         private int Color { get; set; }
 
-        private static Bitmap chessPiecesImage = new Bitmap(Chess.Properties.Resources.pieces);
+        private static Bitmap chessPiecesImage = new Bitmap(Properties.Resources.pieces);
         private static Dictionary<PieceEnum, Dictionary<ColorEnum, Bitmap>> instances;
 
         private ChessPieceImage()

@@ -8,7 +8,7 @@ namespace Chess
         public Layout Layout { get; set; }
         public List<Move> Moves { get; set; }
         public ColorEnum CurrentPlayer { get; set; }
-
+        
         public Context()
         {
         }
@@ -52,5 +52,7 @@ namespace Chess
                 CurrentPlayer = ColorEnum.White;
             }
         }
+
+        
     }
 }

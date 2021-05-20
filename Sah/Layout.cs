@@ -11,5 +11,6 @@ namespace Chess
         public abstract void Update(Move move);
 
         public abstract Layout Clone();
+        public abstract void Promote(Coordinate coordinate, ColorEnum color);
     }
 }

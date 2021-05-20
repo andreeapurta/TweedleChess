@@ -20,7 +20,7 @@ namespace Chess
         protected List<string> Moves { get; set; }
         public PieceEnum Type { get; set; }
         protected int Value { get; set; }
-        protected Coordinate Coordinate { get; set; }
+        public Coordinate Coordinate { get; set; }
         protected Context gameContext;
 
         public virtual List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, Context gameContex)

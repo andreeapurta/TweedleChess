@@ -17,8 +17,6 @@ namespace Chess
         private Brush[] BoardBrushes { get; set; }
         private Coordinate MouseOverCoordinate { get; set; }
 
-        public event EventHandler<MoveProposeEventArgs> ProposeMove;
-
         public Board()
         {
         }
@@ -67,17 +65,18 @@ namespace Chess
             {
                 if (Context.CurrentPlayer == CurrentMove.piece.Color)
                 {
-                    //foreach (var piece in Context.Layout.Values)
-                    //{
-                    //    if (piece.Color != CurrentMove.piece.Color)
-                    //    {
-                    //    }
-                    //}
 
                     var nextMove = CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context);
                     if (CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context).Contains(CurrentMove.EndPosition))
                     {
+                       
                         Context.Update(CurrentMove);
+                        if (CurrentMove.piece.Type == PieceEnum.Pawn && (CurrentMove.EndPosition.Y == 0 || CurrentMove.EndPosition.Y == 9))
+                        {
+
+                            Context.Layout.Promote(CurrentMove.EndPosition, CurrentMove.piece.Color);
+
+                        }
                         this.Refresh();
                     }
                     Cursor = Cursors.Default;
@@ -86,10 +85,6 @@ namespace Chess
                 {
                     MessageBox.Show("Not your turn");
                     Cursor = Cursors.Default;
-                    //TextBox warningTurnTxtBox = new TextBox();
-                    //warningTurnTxtBox.Text = Context.CurrentPlayer.ToString() + " turn!";
-                    //warningTurnTxtBox.Visible = true;
-                    //warningTurnTxtBox.Location = new Point(300, 50);
                 }
             }
         }
@@ -115,7 +110,7 @@ namespace Chess
             DrawPieces(e.Graphics);
         }
 
-        public void Resize(int availableWidth, int availableHeight)
+        public new void Resize(int availableWidth, int availableHeight)
         {
             int x, y;
             int newBoardSize;

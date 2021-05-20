@@ -51,7 +51,7 @@ namespace Chess
                     ContextChange?.Invoke(this, args);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("An error occurred while evaluating a move.",
                    "Evaluate Move Error",

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0EE3FBD9-ACCE-4356-A09B-71BE7B746577}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Sah</RootNamespace>
-    <AssemblyName>Sah</AssemblyName>
+    <RootNamespace>Chess</RootNamespace>
+    <AssemblyName>Chess</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
