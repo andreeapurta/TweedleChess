@@ -16,9 +16,12 @@ namespace Chess
         private PieceFactory PieceFactory { get; set; }
         private Brush[] BoardBrushes { get; set; }
         private Coordinate MouseOverCoordinate { get; set; }
+        public bool gameOver { get; set; }
+        public ColorEnum winner { get; set; }
 
         public Board()
         {
+            gameOver = false;
         }
 
         public void Initialize(int Size, PieceFactory pieceFactory, Context context, Brush[] brushes)
@@ -65,19 +68,34 @@ namespace Chess
             {
                 if (Context.CurrentPlayer == CurrentMove.piece.Color)
                 {
-
                     var nextMove = CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context);
                     if (CurrentMove.piece.GetNextLegalMoves(CurrentMove.StartPosition, Context).Contains(CurrentMove.EndPosition))
                     {
-                       
                         Context.Update(CurrentMove);
+                        this.Refresh();
+                        if (Context.CheckMating())
+                        {
+                            //gameOver = true;
+                            winner = CurrentMove.piece.Color;
+                            DialogResult res = MessageBox.Show(winner.ToString() + " won! Do you want to play again?! ", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            if (res == DialogResult.Yes)
+                            {
+                            }
+                            //if (res == DialogResult.No)
+                            //{
+                            //    this.Close();
+                            //}
+                        }
+                        if (Context.AlertCheck())
+                        {
+                            MessageBox.Show("Check! Save your king!");
+                            Cursor = Cursors.Default;
+                        }
                         if (CurrentMove.piece.Type == PieceEnum.Pawn && (CurrentMove.EndPosition.Y == 0 || CurrentMove.EndPosition.Y == 9))
                         {
-
                             Context.Layout.Promote(CurrentMove.EndPosition, CurrentMove.piece.Color);
-
+                            this.Refresh();
                         }
-                        this.Refresh();
                     }
                     Cursor = Cursors.Default;
                 }

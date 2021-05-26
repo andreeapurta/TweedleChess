@@ -1,5 +1,4 @@
-﻿using Chess.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Chess
 {
@@ -8,9 +7,57 @@ namespace Chess
         public Layout Layout { get; set; }
         public List<Move> Moves { get; set; }
         public ColorEnum CurrentPlayer { get; set; }
-        
+
         public Context()
         {
+        }
+
+        public bool CheckMating()
+        {
+            int numberOfWhiteKings = 0;
+            int numberOfBlackKings = 0;
+            foreach (KeyValuePair<Coordinate, Piece> piece in Layout)
+            {
+                if (((piece.Value.Type == PieceEnum.LeftKing) && (piece.Value.Color == ColorEnum.White)) || ((piece.Value.Type == PieceEnum.RightKing) && (piece.Value.Color == ColorEnum.White)))
+                {
+                    numberOfWhiteKings++;
+                }
+
+                if (((piece.Value.Type == PieceEnum.LeftKing) && (piece.Value.Color == ColorEnum.Black)) || ((piece.Value.Type == PieceEnum.RightKing) && (piece.Value.Color == ColorEnum.Black)))
+                {
+                    numberOfBlackKings++;
+                }
+            }
+
+            if (numberOfBlackKings == 1 || numberOfWhiteKings == 1)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public bool AlertCheck()
+        {
+            Dictionary<Coordinate, Piece> KingsPositions = new Dictionary<Coordinate, Piece>();
+            foreach (KeyValuePair<Coordinate, Piece> piece in Layout)
+            {
+                if ((piece.Value.Type == PieceEnum.LeftKing) || (piece.Value.Type == PieceEnum.RightKing))
+                {
+                    KingsPositions.Add(piece.Key, piece.Value);
+                }
+            }
+            foreach (KeyValuePair<Coordinate, Piece> piece in Layout)
+            {
+                foreach (var king in KingsPositions)
+                {
+                    if (piece.Value.GetNextLegalMoves(piece.Key, this).Contains(king.Key))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public void Initialize(Layout layout)
@@ -52,7 +99,5 @@ namespace Chess
                 CurrentPlayer = ColorEnum.White;
             }
         }
-
-        
     }
 }

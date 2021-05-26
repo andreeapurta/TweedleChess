@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chess
@@ -56,6 +49,19 @@ namespace Chess
             Controls.Add(Board);
             Board.Resize(Width, Height);
             game.Start();
+            //if (Board.gameOver == true)
+            //{
+            //    MessageBox.Show(Board.winner.ToString() + " won!");
+            //    DialogResult res = MessageBox.Show(Board.winner.ToString() + " won! Do you want to play again?! ", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            //    if (res == DialogResult.Yes)
+            //    {
+            //        GameForm gameForm = new GameForm();
+            //    }
+            //    if (res == DialogResult.No)
+            //    {
+            //        this.Close();
+            //    }
+            //}
         }
 
         private void save_Click(object sender, EventArgs e)
