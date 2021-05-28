@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    internal class ChessLayout : Layout
+    public class ChessLayout : Layout
     {
         public ChessLayout()
         {

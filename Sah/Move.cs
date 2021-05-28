@@ -11,5 +11,12 @@ namespace Chess
         public Move()
         {
         }
+
+        public Move(Coordinate StartPosition, Coordinate EndPosition, Piece piece)
+        {
+            this.StartPosition = StartPosition;
+            this.EndPosition = EndPosition;
+            this.piece = piece;
+        }
     }
 }

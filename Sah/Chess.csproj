@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\AI.cs" />
+    <Compile Include="AI\AiNode.cs" />
     <Compile Include="Board.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Chess;
+using System.Collections.Generic;
 
 namespace Chess
 {
@@ -10,7 +11,17 @@ namespace Chess
         private bool revMaxPlayer;
         private int nodeMinValue = -999;
         private int nodeMaxValue = 999;
-        private ChessLayout ChessLayout;
+        public Context context;
+
+        public AI(Context context)
+        {
+            this.context = context;
+        }
+
+        public int CalculateValue(Layout chessLayout, Move move)
+        {
+            return 0;
+        }
 
         public void Init()
         {
@@ -19,54 +30,56 @@ namespace Chess
             depth = 0;
             depth = 4;
 
-            TreeNode<int> rootNode = new TreeNode<int>(-99);
+            TreeNode<AiNode> rootNode = new TreeNode<AiNode>(new AiNode());
+            List<Move> allMoves = new List<Move>();
 
-            //if (color == false)
-            //    revMaxPlayer = true;
-            //else
-            //    revMaxPlayer = false;
-
-            //int rootNodeValue = Minimax(rootNode, depth, nodeMinValue, nodeMaxValue, true);
-
-            ////Console.WriteLine(rootNodeValue);
-
-            //foreach (TreeNode<int> childNode in rootNode.Children)
-            //    if (childNode.Value == rootNodeValue)
-            //    {
-            //        board.LoadBoardWithFen(childNode.Edge);
-            //        break;
-            //    }
+            foreach (var piece in context.Layout)
+            {
+                foreach (var destination in piece.Value.GetNextLegalMoves(piece.Key, context))
+                {
+                    allMoves.Add(new Move(piece.Key, destination, piece.Value));
+                }
+            }
+            foreach (var move in allMoves)
+            {
+                rootNode.AddChild(new AiNode(move, CalculateValue(context.Layout, move)));
+            }
         }
 
-        public void AddChildren(TreeNode<int> node, bool maximizingPlayer)
+        public Move GetNextMove()
         {
-            bool colorToMove = maximizingPlayer;
-            int heuristicVal;
-
-            if (revMaxPlayer)
-                colorToMove = !colorToMove;
-
-            //foreach (KeyValuePair<string, List<string>> pieceMoves in board.GetAllMove(colorToMove))
-            //{
-            //    foreach (string move in pieceMoves.Value)
-            //    {
-            //        board.LoadBoardWithFen(node.Edge);
-            //        board.SetPieceCoord(pieceMoves.Key, move);
-            //        board.UpdateFen();
-
-            //        if (revMaxPlayer)
-            //            heuristicVal = board.GetHeuristicValue() * (-1);
-            //        else
-            //            heuristicVal = board.GetHeuristicValue();
-
-            //        node.AddChild(heuristicVal, board.GetFen());
-            //    }
-            //}
+            return new Move();
         }
+
+        //public void AddChildren(TreeNode<int> node, bool maximizingPlayer)
+        //{
+        //    bool colorToMove = maximizingPlayer;
+        //    int heuristicVal;
+
+        //    if (revMaxPlayer)
+        //        colorToMove = !colorToMove;
+
+        //    foreach (KeyValuePair<string, List<string>> pieceMoves in board.GetAllMove(colorToMove))
+        //    {
+        //        foreach (string move in pieceMoves.Value)
+        //        {
+        //            board.LoadBoardWithFen(node.Edge);
+        //            board.SetPieceCoord(pieceMoves.Key, move);
+        //            board.UpdateFen();
+
+        //            if (revMaxPlayer)
+        //                heuristicVal = board.GetHeuristicValue() * (-1);
+        //            else
+        //                heuristicVal = board.GetHeuristicValue();
+
+        //            node.AddChild(heuristicVal, board.GetFen());
+        //        }
+        //    }
+        //}
 
         public int Minimax(TreeNode<int> node, int depth, int alpha, int beta, bool maximizingPlayer)
         {
-            AddChildren(node, maximizingPlayer);
+            //AddChildren(node, maximizingPlayer);
 
             if (depth == 0 || node.Children.Count == 0)
                 return node.Value;

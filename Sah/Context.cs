@@ -7,6 +7,7 @@ namespace Chess
         public Layout Layout { get; set; }
         public List<Move> Moves { get; set; }
         public ColorEnum CurrentPlayer { get; set; }
+        public bool VsAI { get; set; }
 
         public Context()
         {
@@ -86,6 +87,12 @@ namespace Chess
         {
             this.Layout.Update(move);
             ToggleCurrentPlayer();
+            if (VsAI)
+            {
+                AI ai = new AI(this.Clone());
+                Layout.Update(ai.GetNextMove());
+                ToggleCurrentPlayer();
+            }
         }
 
         public void ToggleCurrentPlayer()
