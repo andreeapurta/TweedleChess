@@ -24,9 +24,8 @@ namespace Chess
         private void CreateMainMenu()
         {
             ToolStripMenuItem mainMenuItem = new ToolStripMenuItem("Menu");
-            mainMenuItem.DropDownItems.Add("Start", null, start_Click);
-            mainMenuItem.DropDownItems.Add("Load", null, load_Click);
-            mainMenuItem.DropDownItems.Add("Save", null, save_Click);
+            mainMenuItem.DropDownItems.Add("Play Human vs Human", null, start_Click);
+            mainMenuItem.DropDownItems.Add("Play Human vs Computer", null, start_AiGameClick);
             mainMenuItem.DropDownItems.Add("Exit", null, exit_Click);
             mainMenu.Items.Add(mainMenuItem);
             this.Controls.Add(mainMenu);
@@ -42,10 +41,21 @@ namespace Chess
         {
         }
 
+        private void start_AiGameClick(object sender, EventArgs e)
+        {
+            game.Setup(Board);
+            game.Initialize(this);
+            game.context.VsAI = true;
+            Controls.Add(Board);
+            Board.Resize(Width, Height);
+            game.Start();
+        }
+
         private void start_Click(object sender, EventArgs e)
         {
             game.Setup(Board);
             game.Initialize(this);
+            game.context.VsAI = false;
             Controls.Add(Board);
             Board.Resize(Width, Height);
             game.Start();

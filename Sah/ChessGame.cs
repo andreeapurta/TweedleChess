@@ -11,7 +11,7 @@ namespace Chess
     public class ChessGame
     {
         private Board board;
-        private Context context;
+        public Context context;
         private ChessLayout layout;
         private PieceFactory pieceFactory;
         public Referee referee;

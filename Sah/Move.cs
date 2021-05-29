@@ -1,6 +1,4 @@
-﻿using Chess;
-
-namespace Chess
+﻿namespace Chess
 {
     public class Move
     {

@@ -29,10 +29,5 @@ namespace Chess
             ContexChangeEventArgs args = new ContexChangeEventArgs() { Contex = Context.Clone() };
             ContextChange?.Invoke(this, args);
         }
-
-        public void Dispose()
-        {
-            Context = null;
-        }
     }
 }

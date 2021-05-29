@@ -1,9 +1,5 @@
-﻿using Chess;
-using Chess.Interfaces;
-using Chess.Pieces;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Chess
 {
@@ -15,7 +11,6 @@ namespace Chess
             Type = type;
         }
 
-        protected string Position { get; set; }
         public ColorEnum Color { get; set; }
         protected List<string> Moves { get; set; }
         public PieceEnum Type { get; set; }
@@ -26,6 +21,16 @@ namespace Chess
         public virtual List<Coordinate> GetNextLegalMoves(Coordinate currentPosition, Context gameContex)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetValue()
+        {
+            return Value;
+        }
+
+        public ColorEnum GetColor()
+        {
+            return Color;
         }
     }
 }
