@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
 namespace Chess
 {
@@ -14,14 +8,14 @@ namespace Chess
         public Context context;
         private ChessLayout layout;
         private PieceFactory pieceFactory;
-        public Referee referee;
+        public Initializer referee;
 
         public void Setup(Board board)
         {
             layout = new ChessLayout();
             pieceFactory = new PieceFactory();
             context = new Context();
-            referee = new Referee();
+            referee = new Initializer();
             this.board = board;
         }
 

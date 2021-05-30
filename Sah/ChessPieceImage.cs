@@ -11,10 +11,6 @@ namespace Chess
         private static Bitmap chessPiecesImage = new Bitmap(Properties.Resources.pieces);
         private static Dictionary<PieceEnum, Dictionary<ColorEnum, Bitmap>> instances;
 
-        private ChessPieceImage()
-        {
-        }
-
         private static Bitmap CropImage(PieceEnum type, ColorEnum color)
         {
             int x = 0, y = 0;

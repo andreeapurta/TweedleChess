@@ -37,45 +37,54 @@ namespace Chess
             this.Refresh();
         }
 
-        private void load_Click(object sender, EventArgs e)
-        {
-        }
-
         private void start_AiGameClick(object sender, EventArgs e)
         {
+            Board.VsAI = true;
             game.Setup(Board);
             game.Initialize(this);
-            game.context.VsAI = true;
+
             Controls.Add(Board);
             Board.Resize(Width, Height);
             game.Start();
+            Board.OnReplay += RestartAiGame;
+            Board.OnExit += Exit;
         }
 
         private void start_Click(object sender, EventArgs e)
         {
+            Board.VsAI = false;
             game.Setup(Board);
             game.Initialize(this);
-            game.context.VsAI = false;
             Controls.Add(Board);
             Board.Resize(Width, Height);
             game.Start();
-            //if (Board.gameOver == true)
-            //{
-            //    MessageBox.Show(Board.winner.ToString() + " won!");
-            //    DialogResult res = MessageBox.Show(Board.winner.ToString() + " won! Do you want to play again?! ", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            //    if (res == DialogResult.Yes)
-            //    {
-            //        GameForm gameForm = new GameForm();
-            //    }
-            //    if (res == DialogResult.No)
-            //    {
-            //        this.Close();
-            //    }
-            //}
+            Board.OnReplay += RestartHumanGame;
+            Board.OnExit += Exit;
         }
 
-        private void save_Click(object sender, EventArgs e)
+        public void RestartHumanGame()
         {
+            Board.VsAI = false;
+            game.Setup(Board);
+            game.Initialize(this);
+            Controls.Add(Board);
+            Board.Resize(Width, Height);
+            game.Start();
+        }
+
+        public void RestartAiGame()
+        {
+            Board.VsAI = true;
+            game.Setup(Board);
+            game.Initialize(this);
+            Controls.Add(Board);
+            Board.Resize(Width, Height);
+            game.Start();
+        }
+
+        private void Exit()
+        {
+            this.Close();
         }
 
         private void exit_Click(object sender, EventArgs e)

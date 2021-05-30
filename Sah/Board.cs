@@ -1,5 +1,4 @@
-﻿using Chess.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,12 +15,22 @@ namespace Chess
         private PieceFactory PieceFactory { get; set; }
         private Brush[] BoardBrushes { get; set; }
         private Coordinate MouseOverCoordinate { get; set; }
-        public bool gameOver { get; set; }
+        public bool VsAI { get; set; }
+        public bool gameOver = false;
+        private bool movement = false;
+
+        public delegate void Reply();  // delegate
+
+        public event Reply OnReplay; // event
+
+        public delegate void Exit();  // delegate
+
+        public event Exit OnExit; // event
+
         public ColorEnum winner { get; set; }
 
         public Board()
         {
-            gameOver = false;
         }
 
         public void Initialize(int Size, PieceFactory pieceFactory, Context context, Brush[] brushes)
@@ -39,9 +48,9 @@ namespace Chess
         {
             MouseOverCoordinate = new Coordinate(e.X / CellSize, e.Y / CellSize);
 
-            if (CurrentMove.piece != null)
+            if (MouseOverCoordinate != null && Context.Layout.ContainsKey(MouseOverCoordinate) && (Context.CurrentPlayer == Context.Layout[MouseOverCoordinate].Color))
             {
-                if (MouseOverCoordinate != null && Context.Layout.ContainsKey(MouseOverCoordinate) && (Context.CurrentPlayer == CurrentMove.piece.Color))
+                if (movement == false)
                 {
                     DrawAvailableMoves(MouseOverCoordinate);
                 }
@@ -58,11 +67,13 @@ namespace Chess
                 CurrentMove.piece = Context.Layout[MouseOverCoordinate];
                 Cursor = new Cursor(ChessPieceImage.GetInstance(CurrentMove.piece.Type, CurrentMove.piece.Color).GetHicon());
             }
+            movement = true;
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             CurrentMove.EndPosition = MouseOverCoordinate;
+            movement = false;
 
             if (CurrentMove.piece != null)
             {
@@ -73,28 +84,36 @@ namespace Chess
                     {
                         Context.Update(CurrentMove);
                         this.Refresh();
+                        if (CurrentMove.piece.Type == PieceEnum.Pawn && (CurrentMove.EndPosition.Y == 0 || CurrentMove.EndPosition.Y == 9))
+                        {
+                            Context.Layout.Promote(CurrentMove.EndPosition, CurrentMove.piece.Color);
+                            this.Refresh();
+                        }
+                        Cursor = Cursors.Default;
+                        if (VsAI)
+                        {
+                            AI ai = new AI(Context.Clone());
+                            Context.Layout.Update(ai.GetNextMove());
+                            Context.ToggleCurrentPlayer();
+                            this.Refresh();
+                        }
                         if (Context.CheckMating())
                         {
-                            //gameOver = true;
                             winner = CurrentMove.piece.Color;
                             DialogResult res = MessageBox.Show(winner.ToString() + " won! Do you want to play again?! ", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (res == DialogResult.Yes)
                             {
+                                OnReplay?.Invoke();
                             }
-                            //if (res == DialogResult.No)
-                            //{
-                            //    this.Close();
-                            //}
+                            else
+                            {
+                                OnExit?.Invoke();
+                            }
                         }
                         if (Context.AlertCheck())
                         {
                             MessageBox.Show("Check! Save your king!");
                             Cursor = Cursors.Default;
-                        }
-                        if (CurrentMove.piece.Type == PieceEnum.Pawn && (CurrentMove.EndPosition.Y == 0 || CurrentMove.EndPosition.Y == 9))
-                        {
-                            Context.Layout.Promote(CurrentMove.EndPosition, CurrentMove.piece.Color);
-                            this.Refresh();
                         }
                     }
                     Cursor = Cursors.Default;
@@ -150,12 +169,6 @@ namespace Chess
                     g.FillRectangle((Y + X) % 2 == 1 ? Brushes.SaddleBrown : Brushes.AntiqueWhite, CellSize * Y, CellSize * X, CellSize, CellSize);
                 }
             }
-        }
-
-        public void LayoutChanged(object sender, ContexChangeEventArgs e)
-        {
-            Context = e.Contex;
-            Invalidate();
         }
 
         private void DrawPieces(Graphics g)

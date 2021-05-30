@@ -1,9 +1,11 @@
-﻿namespace Chess
+﻿using System;
+
+namespace Chess
 {
     public class AI
     {
         //https://www.youtube.com/watch?v=l-hh51ncgDI
-        private const int depth = 10;
+        private const int depth = 4;
 
         private const int nodeMinValue = -999;
         private const int nodeMaxValue = 999;

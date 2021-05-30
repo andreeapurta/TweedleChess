@@ -15,7 +15,7 @@ namespace Chess
             this.Value = Value;
         }
 
-        public void AddChild(AiNode nodeValue)
+        public void AddChild(AiNode nodeValue) //Aadaug copii pentru fiecare nod si il seteaza ca si parinte
         {
             nodeValue.Parent = this;
             Children.Add(nodeValue);

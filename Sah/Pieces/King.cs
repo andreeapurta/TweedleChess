@@ -1,15 +1,11 @@
-﻿using Chess;
-using Chess.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Chess.Pieces
 {
     internal sealed class King : Piece
     {
-        public bool HasMoved = false;
+        public bool HasMoved;
 
         public King(ColorEnum color, PieceEnum type) : base(color, type)
         {
@@ -38,49 +34,49 @@ namespace Chess.Pieces
             }
 
             //jos
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y + 1))) || (currentPosition.Y + 1 < 10) && ((gameContext.Layout[new Coordinate(currentPosition.X, currentPosition.Y + 1)].Color != this.Color)))
+            if ((currentPosition.Y + 1 < 10) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y + 1))) || ((gameContext.Layout[new Coordinate(currentPosition.X, currentPosition.Y + 1)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y + 1));
             }
 
             //sus
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y - 1))) || (currentPosition.Y - 1 >= 0) && ((gameContext.Layout[new Coordinate(currentPosition.X, currentPosition.Y - 1)].Color != this.Color)))
+            if ((currentPosition.Y - 1 >= 0) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y - 1))) || ((gameContext.Layout[new Coordinate(currentPosition.X, currentPosition.Y - 1)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y - 1));
             }
 
             //dreapta
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X + 1, currentPosition.Y))) || (currentPosition.X + 1 < 10) && ((gameContext.Layout[new Coordinate(currentPosition.X + 1, currentPosition.Y)].Color != this.Color)))
+            if ((currentPosition.X + 1 < 10) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X + 1, currentPosition.Y))) || ((gameContext.Layout[new Coordinate(currentPosition.X + 1, currentPosition.Y)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X + 1, currentPosition.Y));
             }
 
             //stanga
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X - 1, currentPosition.Y))) || (currentPosition.X - 1 >= 0) && ((gameContext.Layout[new Coordinate(currentPosition.X - 1, currentPosition.Y)].Color != this.Color)))
+            if ((currentPosition.X - 1 >= 0) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X - 1, currentPosition.Y))) || ((gameContext.Layout[new Coordinate(currentPosition.X - 1, currentPosition.Y)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X - 1, currentPosition.Y));
             }
 
             //diagonala-stanga-sus
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X - 1, currentPosition.Y - 1))) || (currentPosition.X - 1 >= 0) && (currentPosition.Y - 1 >= 0) && ((gameContext.Layout[new Coordinate(currentPosition.X - 1, currentPosition.Y - 1)].Color != this.Color)))
+            if (((currentPosition.Y - 1 >= 0) && (currentPosition.X - 1 >= 0)) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X - 1, currentPosition.Y - 1))) || ((gameContext.Layout[new Coordinate(currentPosition.X - 1, currentPosition.Y - 1)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X - 1, currentPosition.Y - 1));
             }
 
             //diagonala-dreapta-sus
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X + 1, currentPosition.Y - 1))) || (currentPosition.X + 1 < 10) && (currentPosition.Y - 1 >= 0) && ((gameContext.Layout[new Coordinate(currentPosition.X + 1, currentPosition.Y - 1)].Color != this.Color)))
+            if (((currentPosition.Y - 1 >= 0) && (currentPosition.X + 1 < 10)) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X + 1, currentPosition.Y - 1))) || ((gameContext.Layout[new Coordinate(currentPosition.X + 1, currentPosition.Y - 1)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X + 1, currentPosition.Y - 1));
             }
 
             //diagonala-dreapta-jos
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X + 1, currentPosition.Y + 1))) || (currentPosition.X + 1 < 10) && (currentPosition.Y + 1 < 10) && ((gameContext.Layout[new Coordinate(currentPosition.X + 1, currentPosition.Y + 1)].Color != this.Color)))
+            if (((currentPosition.X + 1 < 10) && (currentPosition.Y + 1 < 10)) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X + 1, currentPosition.Y + 1))) || ((gameContext.Layout[new Coordinate(currentPosition.X + 1, currentPosition.Y + 1)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X + 1, currentPosition.Y + 1));
             }
 
             //diagonala-stanga-jos
-            if ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X - 1, currentPosition.Y + 1))) || (currentPosition.X - 1 >= 0) && (currentPosition.Y + 1 < 10) && ((gameContext.Layout[new Coordinate(currentPosition.X - 1, currentPosition.Y + 1)].Color != this.Color)))
+            if (((currentPosition.X - 1 >= 0) && (currentPosition.Y + 1 < 10)) && ((!gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X - 1, currentPosition.Y + 1))) || ((gameContext.Layout[new Coordinate(currentPosition.X - 1, currentPosition.Y + 1)].Color != this.Color))))
             {
                 availableMoves.Add(new Coordinate(currentPosition.X - 1, currentPosition.Y + 1));
             }

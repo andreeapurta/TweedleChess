@@ -1,13 +1,10 @@
-﻿using Chess.Events;
-using System;
+﻿using System;
 
 namespace Chess
 {
-    public class Referee
+    public class Initializer
     {
         private Context Context { get; set; }
-
-        public event EventHandler<ContexChangeEventArgs> ContextChange;
 
         private PieceFactory PieceFactory { get; set; }
 
@@ -18,7 +15,7 @@ namespace Chess
             PieceFactory = pieceFactory;
         }
 
-        public Referee()
+        public Initializer()
         {
         }
 
@@ -26,8 +23,6 @@ namespace Chess
         {
             Context.Layout.Clear();
             Context.InitializeStartingBoard();
-            ContexChangeEventArgs args = new ContexChangeEventArgs() { Contex = Context.Clone() };
-            ContextChange?.Invoke(this, args);
         }
     }
 }

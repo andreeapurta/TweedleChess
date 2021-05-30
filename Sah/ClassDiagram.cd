@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Chess.AI">
+    <Position X="5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAQAAACAAAAAAAAAAAAAAAAAAAQAAAACIAAAAAA=</HashCode>
+      <FileName>AI\AI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.AiNode">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAEAAAAAAEQAAAAAAQAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>AI\AiNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Board">
+    <Position X="17.75" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Chess.Board.Exit" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Board.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Chess.Board.Reply" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Board.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAgBBAgAEAYAAAAAAAUAQAFCRAAEAIAAAAAECAIg=</HashCode>
+      <FileName>Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.ChessGame">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACCAAAQAAAAAAAAAAAQAAAAIAIAAACAEAAAA=</HashCode>
+      <FileName>ChessGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.ChessLayout" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>ChessLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.ChessPieceImage">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAABAAAAAABABAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>ChessPieceImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Context">
+    <Position X="16" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAAAAAQAAAAAAAQAAAAAAAEgIACAAiAAAABA=</HashCode>
+      <FileName>Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Coordinate">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAYAA=</HashCode>
+      <FileName>Coordinate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.GameForm">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQARAACQAAAAAIADAAAACACAAEAAIIAAAACAAAAA=</HashCode>
+      <FileName>GameForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Initializer" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAQAAAAAAAAAgAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Initializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Layout" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAQAAAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Layout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Move">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Move.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Piece">
+    <Position X="10" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAABAAAAAAAACAQAAAAAECAAQAggAAAAAA=</HashCode>
+      <FileName>Piece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.PieceFactory" BaseTypeListCollapsed="true">
+    <Position X="10" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>PieceFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chess.Program">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Tree&lt;T&gt;">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAgAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>AI\Tree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Pieces.Bishop" Collapsed="true">
+    <Position X="5.25" Y="9" Width="1.5" />
+    <InheritanceLine Type="Chess.Piece" ManuallyRouted="true">
+      <Path>
+        <Point X="10.75" Y="7.353" />
+        <Point X="10.75" Y="8.012" />
+        <Point X="6" Y="8.012" />
+        <Point X="6" Y="9" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pieces\Bishop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Pieces.King" Collapsed="true">
+    <Position X="10" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pieces\King.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Pieces.Pawn" Collapsed="true">
+    <Position X="7.75" Y="9" Width="1.5" />
+    <InheritanceLine Type="Chess.Piece" ManuallyRouted="true">
+      <Path>
+        <Point X="10.75" Y="7.353" />
+        <Point X="10.75" Y="8.023" />
+        <Point X="8.5" Y="8.023" />
+        <Point X="8.5" Y="9" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pieces\Pawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Pieces.Queen" Collapsed="true">
+    <Position X="13" Y="9" Width="1.5" />
+    <InheritanceLine Type="Chess.Piece" ManuallyRouted="true">
+      <Path>
+        <Point X="10.75" Y="7.353" />
+        <Point X="10.75" Y="7.976" />
+        <Point X="13.75" Y="7.976" />
+        <Point X="13.75" Y="9" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pieces\Queen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Pieces.Rook" Collapsed="true">
+    <Position X="16" Y="9" Width="1.5" />
+    <InheritanceLine Type="Chess.Piece" ManuallyRouted="true">
+      <Path>
+        <Point X="10.75" Y="7.353" />
+        <Point X="10.75" Y="7.967" />
+        <Point X="16.75" Y="7.967" />
+        <Point X="16.75" Y="9" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pieces\Rook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Pieces.Knight" Collapsed="true">
+    <Position X="18.25" Y="9" Width="1.5" />
+    <InheritanceLine Type="Chess.Piece" ManuallyRouted="true">
+      <Path>
+        <Point X="10.75" Y="7.353" />
+        <Point X="10.75" Y="7.969" />
+        <Point X="19" Y="7.969" />
+        <Point X="19" Y="9" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pieces\Knight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Chess.ColorEnum">
+    <Position X="8" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ColorEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Chess.PieceEnum">
+    <Position X="8" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAEAAAAAEAgAAAAEAAAAQAAAAAgAAAAAAAABEAAAA=</HashCode>
+      <FileName>PieceEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

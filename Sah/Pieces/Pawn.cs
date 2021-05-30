@@ -1,7 +1,4 @@
-﻿using Chess.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Chess.Pieces
@@ -18,7 +15,6 @@ namespace Chess.Pieces
             List<Coordinate> availableMoves = new List<Coordinate>();
             if (Color == ColorEnum.White)
             {
-               
                 if ((currentPosition.Y - 1 >= 0) && !gameContext.Layout.Keys.Contains(new Coordinate(currentPosition.X, currentPosition.Y - 1)))
                 {
                     availableMoves.Add(new Coordinate(currentPosition.X, currentPosition.Y - 1));
@@ -55,7 +51,6 @@ namespace Chess.Pieces
                     availableMoves.Add(new Coordinate(currentPosition.X + 1, currentPosition.Y + 1));
                 }
             }
-
 
             return availableMoves;
         }

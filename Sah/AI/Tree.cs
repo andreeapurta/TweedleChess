@@ -10,8 +10,8 @@ namespace Chess
         {
             Root = new AiNode();
             Root.Move = new Move();
-            Root.CurrentContext = Context.Clone();
-            AddNodes(Root, depth, ColorEnum.Black);
+            Root.CurrentContext = Context.Clone(); //Pe o copie a contextului fac miscarea posibila
+            AddNodes(Root, depth, ColorEnum.Black); //creaza node ul
         }
 
         public void AddNodes(AiNode node, int depth, ColorEnum color) // DEPTH TREBE SA FIE PAR CA SA AVEM NODE MAXIMIZANT LA FRUNZE
@@ -41,11 +41,11 @@ namespace Chess
             {
                 if (piece.Value.GetColor() == ColorEnum.White)
                 {
-                    value += piece.Value.GetValue();
+                    value -= piece.Value.GetValue();
                 }
                 else
                 {
-                    value -= piece.Value.GetValue();
+                    value += piece.Value.GetValue();
                 }
             }
             return value;
@@ -60,7 +60,11 @@ namespace Chess
                 {
                     foreach (var destination in piece.Value.GetNextLegalMoves(piece.Key, node.CurrentContext))
                     {
-                        AllMoves.Add(new Move(piece.Key, destination, piece.Value));
+                        if (AllMoves.Count < 10) //prea multe posibilitati si dureaza foarte mult, asa ca reduc la 10 de mutari
+                        {
+                            AllMoves.Add(new Move(piece.Key, destination, piece.Value));
+                        }
+                        else break;
                     }
                 }
             }
@@ -68,7 +72,6 @@ namespace Chess
             {
                 AiNode child = new AiNode();
                 child.CurrentContext = node.CurrentContext.Clone();
-                //performat mutarea pe contextul asta
                 child.CurrentContext.Update(move);
                 child.Move = move;
                 child.Parent = node;
