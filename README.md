@@ -13,4 +13,9 @@ The normal chess rules apply, except that kings and rooks can only castle "short
 
 Boyer remarked that the variant yields "magnificent games" because there are two directions of attack and two points to defend.
 
+### MinMaxAlgorithm - Alfa beta pruning
+https://www.youtube.com/watch?v=l-hh51ncgDI
+
+
+
 More info: https://en.wikipedia.org/wiki/V._R._Parton
