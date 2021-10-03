@@ -1,5 +1,5 @@
 # Tweedle chess
-Also known as twin orthodox chess or double-king chess
+Also known as twin orthodox chess or double-king chess - univeristy project
 
 - each player has two kings and two queens 
 - 10×10 board 
